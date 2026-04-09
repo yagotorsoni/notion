@@ -18,8 +18,6 @@
   --radius:8px;--radius-lg:12px;
 }
 body{font-family:'Inter',sans-serif;background:var(--bg);color:var(--text);min-height:100vh;display:flex}
-
-/* SIDEBAR */
 .sidebar{width:230px;flex-shrink:0;background:var(--surface2);border-right:1px solid var(--border);display:flex;flex-direction:column;padding:1.25rem .75rem;gap:2px;min-height:100vh}
 .brand{display:flex;align-items:center;gap:10px;padding:6px 8px;margin-bottom:1.25rem}
 .brand-icon{width:30px;height:30px;background:#1A1A1A;border-radius:7px;display:flex;align-items:center;justify-content:center;font-size:14px;flex-shrink:0}
@@ -30,19 +28,13 @@ body{font-family:'Inter',sans-serif;background:var(--bg);color:var(--text);min-h
 .nav-item.active{background:var(--surface);color:var(--text);font-weight:500}
 .nav-dot{width:7px;height:7px;border-radius:50%;flex-shrink:0}
 .nav-icon{font-size:14px;width:16px;text-align:center}
-
-/* MAIN */
 .main{flex:1;padding:2.5rem 3.5rem;min-height:100vh}
 .section-block{display:none}
 .section-block.vis{display:block}
-
-/* PAGE HEADER */
 .page-top{margin-bottom:2rem}
 .page-emoji{font-size:34px;display:block;margin-bottom:8px}
 .page-title{font-size:26px;font-weight:600;color:var(--text);margin-bottom:5px}
 .page-desc{font-size:13px;color:var(--muted)}
-
-/* STATS */
 .stats{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:10px;margin-bottom:2rem}
 .stat{background:var(--surface);border:1px solid var(--border);border-radius:var(--radius-lg);padding:.9rem 1rem}
 .stat-label{font-size:11px;color:var(--hint);font-weight:600;text-transform:uppercase;letter-spacing:.05em;margin-bottom:5px}
@@ -50,14 +42,14 @@ body{font-family:'Inter',sans-serif;background:var(--bg);color:var(--text);min-h
 .stat-sub{font-size:11px;color:var(--hint);margin-top:2px}
 .bar-wrap{height:4px;background:var(--border);border-radius:99px;margin-top:7px;overflow:hidden}
 .bar-fill{height:100%;border-radius:99px;transition:width .5s ease}
-
-/* FILTERS */
-.filters{display:flex;gap:6px;flex-wrap:wrap;margin-bottom:1.25rem}
+.filters{display:flex;gap:6px;flex-wrap:wrap;margin-bottom:1.25rem;align-items:center}
 .fbtn{font-size:12px;padding:5px 13px;border-radius:20px;border:1px solid var(--border);background:var(--surface);color:var(--muted);cursor:pointer;font-family:'Inter',sans-serif;transition:all .12s;font-weight:500}
 .fbtn:hover{border-color:var(--text);color:var(--text)}
 .fbtn.on{background:var(--text);color:#fff;border-color:var(--text)}
-
-/* TABLE */
+.reset-btn{font-size:11px;padding:4px 10px;border-radius:20px;border:1px solid var(--border);background:transparent;color:var(--hint);cursor:pointer;font-family:'Inter',sans-serif;margin-left:auto;transition:all .12s}
+.reset-btn:hover{border-color:var(--red);color:var(--red)}
+.saved-badge{font-size:11px;color:var(--hint);margin-left:8px;opacity:0;transition:opacity .3s}
+.saved-badge.show{opacity:1}
 .table-wrap{background:var(--surface);border:1px solid var(--border);border-radius:var(--radius-lg);overflow:hidden}
 .thead{display:grid;grid-template-columns:minmax(0,2.2fr) minmax(0,.75fr) minmax(0,1fr) 32px;padding:9px 16px;background:var(--surface2);border-bottom:1px solid var(--border);font-size:11px;font-weight:600;color:var(--hint);text-transform:uppercase;letter-spacing:.05em;gap:10px}
 .trow{display:grid;grid-template-columns:minmax(0,2.2fr) minmax(0,.75fr) minmax(0,1fr) 32px;padding:11px 16px;border-bottom:1px solid var(--border);align-items:center;gap:10px;transition:background .1s}
@@ -65,29 +57,21 @@ body{font-family:'Inter',sans-serif;background:var(--bg);color:var(--text);min-h
 .trow:hover{background:#FAFAF9}
 .trow.done-row{opacity:.42}
 .cell-task{display:flex;align-items:center;gap:10px;min-width:0}
-
-/* CHECKBOX */
 .chk{width:17px;height:17px;border:1.5px solid var(--border);border-radius:4px;cursor:pointer;flex-shrink:0;display:flex;align-items:center;justify-content:center;transition:all .15s;background:#fff}
 .chk:hover{border-color:var(--hint)}
 .chk.chk-admin{background:var(--blue);border-color:var(--blue)}
 .chk.chk-op{background:var(--green);border-color:var(--green)}
 .chk svg{width:9px;height:9px;stroke:#fff;stroke-width:2.5;fill:none;opacity:0;transition:opacity .1s}
 .chk.chk-admin svg,.chk.chk-op svg{opacity:1}
-
-/* TASK INPUT */
 .task-input{font-size:13px;color:var(--text);border:none;background:transparent;font-family:'Inter',sans-serif;width:100%;outline:none;padding:2px 4px;border-radius:4px;transition:background .12s;min-width:0}
 .task-input:hover{background:#F3F2EF}
-.task-input:focus{background:#EEECEA;outline:none}
+.task-input:focus{background:#EEECEA}
 .done-row .task-input{text-decoration:line-through;color:var(--hint)}
-
-/* PRIORITY BADGE */
 .pri-btn{font-size:11px;font-weight:600;padding:3px 10px;border-radius:5px;cursor:pointer;border:none;font-family:'Inter',sans-serif;transition:all .12s;white-space:nowrap}
 .pri-btn:hover{filter:brightness(.93)}
 .p-alta{background:var(--red-bg);color:var(--red)}
 .p-media{background:var(--amber-bg);color:var(--amber)}
 .p-baixa{background:var(--blue-bg);color:var(--blue-dark)}
-
-/* STATUS BADGE */
 .status-btn{font-size:11px;font-weight:500;padding:3px 9px;border-radius:5px;cursor:pointer;border:none;font-family:'Inter',sans-serif;display:inline-flex;align-items:center;gap:5px;transition:all .12s;white-space:nowrap}
 .status-btn:hover{filter:brightness(.93)}
 .sdot{width:6px;height:6px;border-radius:50%;flex-shrink:0}
@@ -95,14 +79,10 @@ body{font-family:'Inter',sans-serif;background:var(--bg);color:var(--text);min-h
 .s-doing{background:var(--amber-bg);color:var(--amber)}.s-doing .sdot{background:var(--amber)}
 .s-done{background:var(--green-bg);color:var(--green)}.s-done .sdot{background:var(--green)}
 .s-blocked{background:var(--red-bg);color:var(--red)}.s-blocked .sdot{background:var(--red)}
-
-/* DELETE */
 .del-btn{width:26px;height:26px;border-radius:5px;border:none;background:transparent;cursor:pointer;display:flex;align-items:center;justify-content:center;opacity:0;transition:opacity .12s;flex-shrink:0}
 .trow:hover .del-btn{opacity:1}
 .del-btn:hover{background:var(--red-bg)}
 .del-btn svg{width:12px;height:12px;stroke:var(--red);stroke-width:2;fill:none}
-
-/* ADD ROW */
 .add-row{display:flex;align-items:center;gap:10px;padding:10px 16px;border-top:1px solid var(--border);cursor:pointer;transition:background .12s;user-select:none}
 .add-row:hover{background:#FAFAF9}
 .add-icon{width:20px;height:20px;border-radius:5px;border:1.5px dashed var(--border);display:flex;align-items:center;justify-content:center;flex-shrink:0;transition:border-color .12s}
@@ -136,7 +116,6 @@ body{font-family:'Inter',sans-serif;background:var(--bg);color:var(--text);min-h
 
 <div class="main">
 
-  <!-- ADMIN -->
   <div id="sec-admin" class="section-block vis">
     <div class="page-top">
       <span class="page-emoji">🗂️</span>
@@ -150,6 +129,8 @@ body{font-family:'Inter',sans-serif;background:var(--bg);color:var(--text);min-h
       <button class="fbtn" onclick="applyFilter('admin','Em andamento',this)">Em andamento</button>
       <button class="fbtn" onclick="applyFilter('admin','Concluído',this)">Concluídas</button>
       <button class="fbtn" onclick="applyFilter('admin','alta',this)">🔴 Alta prioridade</button>
+      <span class="saved-badge" id="saved-admin">✓ Salvo</span>
+      <button class="reset-btn" onclick="resetSection('admin')">↺ Restaurar padrão</button>
     </div>
     <div class="table-wrap">
       <div class="thead"><div>Tarefa</div><div>Prioridade</div><div>Status</div><div></div></div>
@@ -161,7 +142,6 @@ body{font-family:'Inter',sans-serif;background:var(--bg);color:var(--text);min-h
     </div>
   </div>
 
-  <!-- OPERACIONAL -->
   <div id="sec-op" class="section-block">
     <div class="page-top">
       <span class="page-emoji">⚙️</span>
@@ -175,6 +155,8 @@ body{font-family:'Inter',sans-serif;background:var(--bg);color:var(--text);min-h
       <button class="fbtn" onclick="applyFilter('op','Em andamento',this)">Em andamento</button>
       <button class="fbtn" onclick="applyFilter('op','Concluído',this)">Concluídas</button>
       <button class="fbtn" onclick="applyFilter('op','alta',this)">🔴 Alta prioridade</button>
+      <span class="saved-badge" id="saved-op">✓ Salvo</span>
+      <button class="reset-btn" onclick="resetSection('op')">↺ Restaurar padrão</button>
     </div>
     <div class="table-wrap">
       <div class="thead"><div>Tarefa</div><div>Prioridade</div><div>Status</div><div></div></div>
@@ -189,166 +171,216 @@ body{font-family:'Inter',sans-serif;background:var(--bg);color:var(--text);min-h
 </div>
 
 <script>
-const data = {
+// ── DADOS PADRÃO ──────────────────────────────────────────
+var DEFAULTS = {
   admin: [
-    {id:1,  name:"Abrir CNPJ",                          pri:"Alta",  status:"A fazer"},
-    {id:2,  name:"Definir contrato social entre sócios", pri:"Alta",  status:"A fazer"},
-    {id:3,  name:"Abrir conta PJ",                       pri:"Alta",  status:"A fazer"},
-    {id:4,  name:"Contratar contador",                   pri:"Alta",  status:"A fazer"},
-    {id:5,  name:"Definir regime tributário",             pri:"Alta",  status:"A fazer"},
-    {id:6,  name:"Definir pró-labore dos sócios",        pri:"Alta",  status:"A fazer"},
-    {id:7,  name:"Assinar NDA entre sócios",             pri:"Alta",  status:"A fazer"},
-    {id:8,  name:"Criar e-mail corporativo",             pri:"Alta",  status:"A fazer"},
-    {id:9,  name:"Registrar marca no INPI",              pri:"Média", status:"A fazer"},
-    {id:10, name:"Criar pasta compartilhada no Drive",   pri:"Baixa", status:"A fazer"},
-    {id:11, name:"Abrir conta de investimento PJ",       pri:"Média", status:"A fazer"},
-    {id:12, name:"Configurar certificado digital e-CNPJ",pri:"Média", status:"A fazer"},
+    {id:1,  name:"Abrir CNPJ",                           pri:"Alta",  status:"A fazer"},
+    {id:2,  name:"Definir contrato social entre sócios",  pri:"Alta",  status:"A fazer"},
+    {id:3,  name:"Abrir conta PJ",                        pri:"Alta",  status:"A fazer"},
+    {id:4,  name:"Contratar contador",                    pri:"Alta",  status:"A fazer"},
+    {id:5,  name:"Definir regime tributário",              pri:"Alta",  status:"A fazer"},
+    {id:6,  name:"Definir pró-labore dos sócios",         pri:"Alta",  status:"A fazer"},
+    {id:7,  name:"Assinar NDA entre sócios",              pri:"Alta",  status:"A fazer"},
+    {id:8,  name:"Criar e-mail corporativo",              pri:"Alta",  status:"A fazer"},
+    {id:9,  name:"Registrar marca no INPI",               pri:"Média", status:"A fazer"},
+    {id:10, name:"Criar pasta compartilhada no Drive",    pri:"Baixa", status:"A fazer"},
+    {id:11, name:"Abrir conta de investimento PJ",        pri:"Média", status:"A fazer"},
+    {id:12, name:"Configurar certificado digital e-CNPJ", pri:"Média", status:"A fazer"}
   ],
   op: [
-    {id:101, name:"Definir MVP",                          pri:"Alta",  status:"A fazer"},
-    {id:102, name:"Mapear 20 potenciais clientes",        pri:"Alta",  status:"A fazer"},
-    {id:103, name:"Criar pitch de apresentação",          pri:"Alta",  status:"A fazer"},
-    {id:104, name:"Fazer 10 entrevistas de validação",    pri:"Alta",  status:"A fazer"},
-    {id:105, name:"Definir precificação",                 pri:"Alta",  status:"A fazer"},
-    {id:106, name:"Criar proposta comercial padrão",      pri:"Alta",  status:"A fazer"},
-    {id:107, name:"Montar funil de vendas",               pri:"Alta",  status:"A fazer"},
-    {id:108, name:"Criar template de contrato com cliente",pri:"Alta", status:"A fazer"},
-    {id:109, name:"Definir OKRs do 1º trimestre",         pri:"Alta",  status:"A fazer"},
-    {id:110, name:"Documentar processo de entrega (SOP)", pri:"Média", status:"A fazer"},
-    {id:111, name:"Criar perfil LinkedIn da empresa",     pri:"Média", status:"A fazer"},
-    {id:112, name:"Montar onboarding de clientes",        pri:"Média", status:"A fazer"},
-    {id:113, name:"Mapear concorrentes principais",       pri:"Média", status:"A fazer"},
-    {id:114, name:"Criar landing page ou site básico",    pri:"Média", status:"A fazer"},
+    {id:101, name:"Definir MVP",                           pri:"Alta",  status:"A fazer"},
+    {id:102, name:"Mapear 20 potenciais clientes",         pri:"Alta",  status:"A fazer"},
+    {id:103, name:"Criar pitch de apresentação",           pri:"Alta",  status:"A fazer"},
+    {id:104, name:"Fazer 10 entrevistas de validação",     pri:"Alta",  status:"A fazer"},
+    {id:105, name:"Definir precificação",                  pri:"Alta",  status:"A fazer"},
+    {id:106, name:"Criar proposta comercial padrão",       pri:"Alta",  status:"A fazer"},
+    {id:107, name:"Montar funil de vendas",                pri:"Alta",  status:"A fazer"},
+    {id:108, name:"Criar template de contrato com cliente",pri:"Alta",  status:"A fazer"},
+    {id:109, name:"Definir OKRs do 1º trimestre",          pri:"Alta",  status:"A fazer"},
+    {id:110, name:"Documentar processo de entrega (SOP)",  pri:"Média", status:"A fazer"},
+    {id:111, name:"Criar perfil LinkedIn da empresa",      pri:"Média", status:"A fazer"},
+    {id:112, name:"Montar onboarding de clientes",         pri:"Média", status:"A fazer"},
+    {id:113, name:"Mapear concorrentes principais",        pri:"Média", status:"A fazer"},
+    {id:114, name:"Criar landing page ou site básico",     pri:"Média", status:"A fazer"}
   ]
 };
 
-let filterState = {admin:'todos', op:'todos'};
-let nextId = 300;
+// ── STORAGE ───────────────────────────────────────────────
+var STORAGE_KEY = 'startupOS_v1';
 
-const priCycle    = ['Alta','Média','Baixa'];
-const statusCycle = ['A fazer','Em andamento','Concluído','Bloqueado'];
-const priClass    = {Alta:'p-alta', Média:'p-media', Baixa:'p-baixa'};
-const statusClass = {'A fazer':'s-todo','Em andamento':'s-doing','Concluído':'s-done','Bloqueado':'s-blocked'};
-const accentColor = {admin:'#2F6FED', op:'#0F9B72'};
+function loadData() {
+  try {
+    var raw = localStorage.getItem(STORAGE_KEY);
+    if (raw) {
+      var parsed = JSON.parse(raw);
+      if (parsed.admin && parsed.op) return parsed;
+    }
+  } catch(e) {}
+  return deepClone(DEFAULTS);
+}
 
+function saveData() {
+  try {
+    localStorage.setItem(STORAGE_KEY, JSON.stringify(data));
+  } catch(e) {}
+}
+
+function deepClone(obj) {
+  return JSON.parse(JSON.stringify(obj));
+}
+
+function flashSaved(sec) {
+  var badge = document.getElementById('saved-' + sec);
+  badge.classList.add('show');
+  clearTimeout(badge._t);
+  badge._t = setTimeout(function(){ badge.classList.remove('show'); }, 1800);
+}
+
+// ── ESTADO ────────────────────────────────────────────────
+var data = loadData();
+var filterState = {admin:'todos', op:'todos'};
+var nextId = 400;
+
+var priCycle    = ['Alta','Média','Baixa'];
+var statusCycle = ['A fazer','Em andamento','Concluído','Bloqueado'];
+var priClass    = {Alta:'p-alta', 'Média':'p-media', Baixa:'p-baixa'};
+var statusClass = {'A fazer':'s-todo','Em andamento':'s-doing','Concluído':'s-done','Bloqueado':'s-blocked'};
+var accentColor = {admin:'#2F6FED', op:'#0F9B72'};
+
+// ── RENDER ────────────────────────────────────────────────
 function getVisible(sec) {
-  const f = filterState[sec];
+  var f = filterState[sec];
   if (f === 'todos') return data[sec];
-  if (f === 'alta')  return data[sec].filter(t => t.pri === 'Alta' && t.status !== 'Concluído');
-  return data[sec].filter(t => t.status === f);
+  if (f === 'alta')  return data[sec].filter(function(t){ return t.pri==='Alta' && t.status!=='Concluído'; });
+  return data[sec].filter(function(t){ return t.status===f; });
 }
 
 function renderStats(sec) {
-  const tasks = data[sec];
-  const total = tasks.length;
-  const done  = tasks.filter(t => t.status === 'Concluído').length;
-  const doing = tasks.filter(t => t.status === 'Em andamento').length;
-  const alta  = tasks.filter(t => t.pri === 'Alta' && t.status !== 'Concluído').length;
-  const pct   = total ? Math.round(done / total * 100) : 0;
-  const color = accentColor[sec];
-  document.getElementById('stats-' + sec).innerHTML =
-    '<div class="stat"><div class="stat-label">Total</div><div class="stat-val">' + total + '</div><div class="stat-sub">tarefas</div></div>' +
-    '<div class="stat"><div class="stat-label">Concluídas</div><div class="stat-val" style="color:' + color + '">' + done + '</div><div class="bar-wrap"><div class="bar-fill" style="width:' + pct + '%;background:' + color + '"></div></div></div>' +
-    '<div class="stat"><div class="stat-label">Em andamento</div><div class="stat-val">' + doing + '</div><div class="stat-sub">tarefas</div></div>' +
-    '<div class="stat"><div class="stat-label">Alta prioridade</div><div class="stat-val" style="color:#C0392B">' + alta + '</div><div class="stat-sub">requerem atenção</div></div>';
+  var tasks = data[sec];
+  var total = tasks.length;
+  var done  = tasks.filter(function(t){ return t.status==='Concluído'; }).length;
+  var doing = tasks.filter(function(t){ return t.status==='Em andamento'; }).length;
+  var alta  = tasks.filter(function(t){ return t.pri==='Alta' && t.status!=='Concluído'; }).length;
+  var pct   = total ? Math.round(done / total * 100) : 0;
+  var color = accentColor[sec];
+  document.getElementById('stats-'+sec).innerHTML =
+    '<div class="stat"><div class="stat-label">Total</div><div class="stat-val">'+total+'</div><div class="stat-sub">tarefas</div></div>'+
+    '<div class="stat"><div class="stat-label">Concluídas</div><div class="stat-val" style="color:'+color+'">'+done+'</div><div class="bar-wrap"><div class="bar-fill" style="width:'+pct+'%;background:'+color+'"></div></div></div>'+
+    '<div class="stat"><div class="stat-label">Em andamento</div><div class="stat-val">'+doing+'</div><div class="stat-sub">tarefas</div></div>'+
+    '<div class="stat"><div class="stat-label">Alta prioridade</div><div class="stat-val" style="color:#C0392B">'+alta+'</div><div class="stat-sub">requerem atenção</div></div>';
 }
 
 function render(sec) {
   renderStats(sec);
-  const list    = document.getElementById('list-' + sec);
-  const chkCls  = sec === 'admin' ? 'chk-admin' : 'chk-op';
-  const visible = getVisible(sec);
+  var list     = document.getElementById('list-'+sec);
+  var chkCls   = sec==='admin' ? 'chk-admin' : 'chk-op';
+  var visible  = getVisible(sec);
   list.innerHTML = '';
   visible.forEach(function(t) {
-    const isDone = t.status === 'Concluído';
-    const row = document.createElement('div');
+    var isDone = t.status === 'Concluído';
+    var row = document.createElement('div');
     row.className = 'trow' + (isDone ? ' done-row' : '');
     row.innerHTML =
-      '<div class="cell-task">' +
-        '<div class="chk ' + (isDone ? chkCls : '') + '" onclick="toggleDone(\'' + sec + '\',' + t.id + ')">' +
-          '<svg viewBox="0 0 9 7"><polyline points="1,3.5 3.5,6 8,1"/></svg>' +
-        '</div>' +
-        '<input class="task-input" value="' + escHtml(t.name) + '" ' +
-          'onblur="editName(\'' + sec + '\',' + t.id + ',this.value)" ' +
-          'onkeydown="if(event.key===\'Enter\')this.blur()" ' +
-          'title="Clique para editar o nome">' +
-      '</div>' +
-      '<div>' +
-        '<button class="pri-btn ' + priClass[t.pri] + '" onclick="cyclePri(\'' + sec + '\',' + t.id + ')" title="Clique para mudar a prioridade">' + t.pri + '</button>' +
-      '</div>' +
-      '<div>' +
-        '<button class="status-btn ' + statusClass[t.status] + '" onclick="cycleStatus(\'' + sec + '\',' + t.id + ')" title="Clique para avançar o status">' +
-          '<span class="sdot"></span>' + t.status +
-        '</button>' +
-      '</div>' +
-      '<div style="display:flex;justify-content:center">' +
-        '<button class="del-btn" onclick="deleteTask(\'' + sec + '\',' + t.id + ')" title="Excluir tarefa">' +
-          '<svg viewBox="0 0 12 12"><line x1="2" y1="2" x2="10" y2="10"/><line x1="10" y1="2" x2="2" y2="10"/></svg>' +
-        '</button>' +
+      '<div class="cell-task">'+
+        '<div class="chk '+(isDone?chkCls:'')+'" onclick="toggleDone(\''+sec+'\','+t.id+')">'+
+          '<svg viewBox="0 0 9 7"><polyline points="1,3.5 3.5,6 8,1"/></svg>'+
+        '</div>'+
+        '<input class="task-input" value="'+escHtml(t.name)+'" '+
+          'onblur="editName(\''+sec+'\','+t.id+',this.value)" '+
+          'onkeydown="if(event.key===\'Enter\')this.blur()" '+
+          'title="Clique para editar">'+
+      '</div>'+
+      '<div>'+
+        '<button class="pri-btn '+priClass[t.pri]+'" onclick="cyclePri(\''+sec+'\','+t.id+')" title="Clique para mudar a prioridade">'+t.pri+'</button>'+
+      '</div>'+
+      '<div>'+
+        '<button class="status-btn '+statusClass[t.status]+'" onclick="cycleStatus(\''+sec+'\','+t.id+')">'+
+          '<span class="sdot"></span>'+t.status+
+        '</button>'+
+      '</div>'+
+      '<div style="display:flex;justify-content:center">'+
+        '<button class="del-btn" onclick="deleteTask(\''+sec+'\','+t.id+')" title="Excluir">'+
+          '<svg viewBox="0 0 12 12"><line x1="2" y1="2" x2="10" y2="10"/><line x1="10" y1="2" x2="2" y2="10"/></svg>'+
+        '</button>'+
       '</div>';
     list.appendChild(row);
   });
 }
 
 function escHtml(str) {
-  return str.replace(/&/g,'&amp;').replace(/"/g,'&quot;').replace(/</g,'&lt;').replace(/>/g,'&gt;');
+  return String(str).replace(/&/g,'&amp;').replace(/"/g,'&quot;').replace(/</g,'&lt;').replace(/>/g,'&gt;');
+}
+
+// ── AÇÕES ─────────────────────────────────────────────────
+function persist(sec) {
+  saveData();
+  flashSaved(sec);
 }
 
 function toggleDone(sec, id) {
-  var t = data[sec].find(function(x){return x.id===id});
-  t.status = t.status === 'Concluído' ? 'A fazer' : 'Concluído';
-  render(sec);
+  var t = data[sec].find(function(x){ return x.id===id; });
+  t.status = t.status==='Concluído' ? 'A fazer' : 'Concluído';
+  render(sec); persist(sec);
 }
 
 function cyclePri(sec, id) {
-  var t = data[sec].find(function(x){return x.id===id});
-  t.pri = priCycle[(priCycle.indexOf(t.pri) + 1) % priCycle.length];
-  render(sec);
+  var t = data[sec].find(function(x){ return x.id===id; });
+  t.pri = priCycle[(priCycle.indexOf(t.pri)+1) % priCycle.length];
+  render(sec); persist(sec);
 }
 
 function cycleStatus(sec, id) {
-  var t = data[sec].find(function(x){return x.id===id});
-  t.status = statusCycle[(statusCycle.indexOf(t.status) + 1) % statusCycle.length];
-  render(sec);
+  var t = data[sec].find(function(x){ return x.id===id; });
+  t.status = statusCycle[(statusCycle.indexOf(t.status)+1) % statusCycle.length];
+  render(sec); persist(sec);
 }
 
 function editName(sec, id, val) {
   var trimmed = val.trim();
   if (!trimmed) return;
-  var t = data[sec].find(function(x){return x.id===id});
-  t.name = trimmed;
+  var t = data[sec].find(function(x){ return x.id===id; });
+  if (t.name !== trimmed) { t.name = trimmed; persist(sec); }
 }
 
 function deleteTask(sec, id) {
   if (!confirm('Excluir esta tarefa?')) return;
-  data[sec] = data[sec].filter(function(x){return x.id!==id});
-  render(sec);
+  data[sec] = data[sec].filter(function(x){ return x.id!==id; });
+  render(sec); persist(sec);
 }
 
 function addTask(sec) {
-  data[sec].push({id: nextId++, name: 'Nova tarefa', pri: 'Média', status: 'A fazer'});
+  data[sec].push({id: nextId++, name:'Nova tarefa', pri:'Média', status:'A fazer'});
   filterState[sec] = 'todos';
-  document.querySelectorAll('#filters-' + sec + ' .fbtn').forEach(function(b, i){ b.classList.toggle('on', i===0); });
-  render(sec);
-  var inputs = document.querySelectorAll('#list-' + sec + ' .task-input');
-  var last = inputs[inputs.length - 1];
+  document.querySelectorAll('#filters-'+sec+' .fbtn').forEach(function(b,i){ b.classList.toggle('on', i===0); });
+  render(sec); persist(sec);
+  var inputs = document.querySelectorAll('#list-'+sec+' .task-input');
+  var last = inputs[inputs.length-1];
   if (last) { last.focus(); last.select(); }
 }
 
 function applyFilter(sec, f, btn) {
   filterState[sec] = f;
-  document.querySelectorAll('#filters-' + sec + ' .fbtn').forEach(function(b){ b.classList.remove('on'); });
+  document.querySelectorAll('#filters-'+sec+' .fbtn').forEach(function(b){ b.classList.remove('on'); });
   btn.classList.add('on');
   render(sec);
 }
 
 function switchSection(sec) {
-  ['admin','op'].forEach(function(s) {
-    document.getElementById('sec-'  + s).classList.toggle('vis',    s === sec);
-    document.getElementById('nav-'  + s).classList.toggle('active', s === sec);
+  ['admin','op'].forEach(function(s){
+    document.getElementById('sec-'+s).classList.toggle('vis', s===sec);
+    document.getElementById('nav-'+s).classList.toggle('active', s===sec);
   });
 }
 
+function resetSection(sec) {
+  if (!confirm('Restaurar as tarefas padrão de '+( sec==='admin'?'Administrativo':'Operacional')+'?\nIsso apagará todas as alterações desta aba.')) return;
+  data[sec] = deepClone(DEFAULTS[sec]);
+  filterState[sec] = 'todos';
+  document.querySelectorAll('#filters-'+sec+' .fbtn').forEach(function(b,i){ b.classList.toggle('on', i===0); });
+  render(sec); persist(sec);
+}
+
+// ── INIT ──────────────────────────────────────────────────
 render('admin');
 render('op');
 </script>
