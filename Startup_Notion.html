@@ -1,0 +1,625 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Startup OS</title>
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&display=swap');
+
+  :root {
+    --bg: #F7F7F5;
+    --surface: #FFFFFF;
+    --border: #E5E5E3;
+    --text: #1A1A1A;
+    --muted: #787774;
+    --accent-admin: #2F6FED;
+    --accent-admin-bg: #EEF3FD;
+    --accent-op: #0F9B72;
+    --accent-op-bg: #E9F7F2;
+    --tag-alta-bg: #FDECEA;
+    --tag-alta: #C0392B;
+    --tag-media-bg: #FEF3E2;
+    --tag-media: #B7620A;
+    --tag-baixa-bg: #EEF3FD;
+    --tag-baixa: #2F6FED;
+    --done-text: #A0A09E;
+  }
+
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+
+  body {
+    font-family: 'Inter', sans-serif;
+    background: var(--bg);
+    color: var(--text);
+    min-height: 100vh;
+  }
+
+  .sidebar {
+    width: 240px;
+    height: 100vh;
+    background: #EFEDE9;
+    border-right: 0.5px solid var(--border);
+    position: fixed;
+    top: 0; left: 0;
+    display: flex;
+    flex-direction: column;
+    padding: 1.5rem 1rem;
+    gap: 4px;
+  }
+
+  .brand {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    padding: 6px 8px;
+    margin-bottom: 1rem;
+  }
+
+  .brand-icon {
+    width: 28px; height: 28px;
+    background: #1A1A1A;
+    border-radius: 6px;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 14px;
+  }
+
+  .brand-name {
+    font-size: 14px;
+    font-weight: 600;
+    color: var(--text);
+  }
+
+  .nav-section {
+    font-size: 11px;
+    font-weight: 600;
+    color: var(--muted);
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    padding: 8px 8px 4px;
+    margin-top: 8px;
+  }
+
+  .nav-item {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    padding: 6px 8px;
+    border-radius: 6px;
+    font-size: 13px;
+    color: var(--text);
+    cursor: pointer;
+    transition: background 0.1s;
+    text-decoration: none;
+  }
+
+  .nav-item:hover { background: #E3E1DC; }
+  .nav-item.active { background: #DDDBD7; font-weight: 500; }
+
+  .nav-dot {
+    width: 6px; height: 6px;
+    border-radius: 50%;
+  }
+
+  .main {
+    margin-left: 240px;
+    padding: 3rem 4rem;
+    max-width: 1000px;
+  }
+
+  .page-header {
+    margin-bottom: 2.5rem;
+  }
+
+  .page-emoji { font-size: 36px; margin-bottom: 8px; display: block; }
+
+  .page-title {
+    font-size: 28px;
+    font-weight: 600;
+    color: var(--text);
+    margin-bottom: 6px;
+  }
+
+  .page-desc {
+    font-size: 14px;
+    color: var(--muted);
+  }
+
+  .stats-row {
+    display: grid;
+    grid-template-columns: repeat(4, minmax(0,1fr));
+    gap: 12px;
+    margin-bottom: 2.5rem;
+  }
+
+  .stat-card {
+    background: var(--surface);
+    border: 0.5px solid var(--border);
+    border-radius: 10px;
+    padding: 1rem;
+  }
+
+  .stat-label {
+    font-size: 11px;
+    color: var(--muted);
+    margin-bottom: 4px;
+    font-weight: 500;
+    text-transform: uppercase;
+    letter-spacing: 0.04em;
+  }
+
+  .stat-value {
+    font-size: 22px;
+    font-weight: 600;
+    color: var(--text);
+  }
+
+  .stat-sub {
+    font-size: 11px;
+    color: var(--muted);
+    margin-top: 2px;
+  }
+
+  .tabs {
+    display: flex;
+    gap: 4px;
+    margin-bottom: 1.5rem;
+    border-bottom: 0.5px solid var(--border);
+    padding-bottom: 0;
+  }
+
+  .tab {
+    font-size: 13px;
+    font-weight: 500;
+    padding: 8px 16px;
+    border-radius: 6px 6px 0 0;
+    cursor: pointer;
+    color: var(--muted);
+    border: none;
+    background: none;
+    border-bottom: 2px solid transparent;
+    transition: all 0.15s;
+    margin-bottom: -0.5px;
+  }
+
+  .tab:hover { color: var(--text); }
+
+  .tab.active-admin {
+    color: var(--accent-admin);
+    border-bottom-color: var(--accent-admin);
+  }
+
+  .tab.active-op {
+    color: var(--accent-op);
+    border-bottom-color: var(--accent-op);
+  }
+
+  .section { display: none; }
+  .section.visible { display: block; }
+
+  .filter-row {
+    display: flex;
+    gap: 8px;
+    margin-bottom: 1.25rem;
+    flex-wrap: wrap;
+  }
+
+  .filter-btn {
+    font-size: 12px;
+    padding: 4px 12px;
+    border-radius: 20px;
+    border: 0.5px solid var(--border);
+    background: var(--surface);
+    color: var(--muted);
+    cursor: pointer;
+    transition: all 0.15s;
+    font-family: 'Inter', sans-serif;
+  }
+
+  .filter-btn:hover, .filter-btn.active {
+    background: var(--text);
+    color: #fff;
+    border-color: var(--text);
+  }
+
+  .checklist {
+    background: var(--surface);
+    border: 0.5px solid var(--border);
+    border-radius: 12px;
+    overflow: hidden;
+  }
+
+  .checklist-header {
+    display: grid;
+    grid-template-columns: 2fr 1fr 1fr 1fr;
+    padding: 10px 16px;
+    background: #F7F7F5;
+    border-bottom: 0.5px solid var(--border);
+    font-size: 11px;
+    font-weight: 600;
+    color: var(--muted);
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+  }
+
+  .task-row {
+    display: grid;
+    grid-template-columns: 2fr 1fr 1fr 1fr;
+    padding: 12px 16px;
+    border-bottom: 0.5px solid var(--border);
+    align-items: center;
+    transition: background 0.1s;
+    gap: 8px;
+  }
+
+  .task-row:last-child { border-bottom: none; }
+  .task-row:hover { background: #FAFAFA; }
+  .task-row.done { opacity: 0.5; }
+
+  .task-check {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+  }
+
+  .checkbox {
+    width: 16px; height: 16px;
+    border: 1.5px solid #C8C8C5;
+    border-radius: 4px;
+    cursor: pointer;
+    flex-shrink: 0;
+    display: flex; align-items: center; justify-content: center;
+    transition: all 0.15s;
+    background: #fff;
+  }
+
+  .checkbox.checked-admin {
+    background: var(--accent-admin);
+    border-color: var(--accent-admin);
+  }
+
+  .checkbox.checked-op {
+    background: var(--accent-op);
+    border-color: var(--accent-op);
+  }
+
+  .checkbox svg {
+    width: 10px; height: 10px;
+    stroke: #fff;
+    stroke-width: 2.5;
+    fill: none;
+    opacity: 0;
+    transition: opacity 0.1s;
+  }
+
+  .checkbox.checked-admin svg,
+  .checkbox.checked-op svg { opacity: 1; }
+
+  .task-name {
+    font-size: 13px;
+    color: var(--text);
+    font-weight: 400;
+  }
+
+  .task-row.done .task-name {
+    text-decoration: line-through;
+    color: var(--done-text);
+  }
+
+  .tag {
+    display: inline-flex;
+    align-items: center;
+    font-size: 11px;
+    font-weight: 500;
+    padding: 2px 8px;
+    border-radius: 4px;
+  }
+
+  .tag-alta { background: var(--tag-alta-bg); color: var(--tag-alta); }
+  .tag-media { background: var(--tag-media-bg); color: var(--tag-media); }
+  .tag-baixa { background: var(--tag-baixa-bg); color: var(--tag-baixa); }
+
+  .status-badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 5px;
+    font-size: 11px;
+    font-weight: 500;
+    padding: 3px 8px;
+    border-radius: 4px;
+    cursor: pointer;
+    border: none;
+    font-family: 'Inter', sans-serif;
+  }
+
+  .status-dot { width: 6px; height: 6px; border-radius: 50%; }
+
+  .status-todo { background: #F0EFED; color: #5A5A57; }
+  .status-todo .status-dot { background: #A0A09E; }
+  .status-doing { background: var(--tag-media-bg); color: var(--tag-media); }
+  .status-doing .status-dot { background: var(--tag-media); }
+  .status-done-badge { background: #E9F7F2; color: #0F9B72; }
+  .status-done-badge .status-dot { background: #0F9B72; }
+  .status-blocked { background: #FDECEA; color: var(--tag-alta); }
+  .status-blocked .status-dot { background: var(--tag-alta); }
+
+  .obs-cell {
+    font-size: 12px;
+    color: var(--muted);
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+
+  .progress-bar-wrap {
+    background: var(--border);
+    border-radius: 99px;
+    height: 5px;
+    margin-top: 4px;
+    overflow: hidden;
+  }
+
+  .progress-bar {
+    height: 100%;
+    border-radius: 99px;
+    transition: width 0.4s ease;
+  }
+
+  .progress-admin { background: var(--accent-admin); }
+  .progress-op { background: var(--accent-op); }
+</style>
+</head>
+<body>
+
+<div class="sidebar">
+  <div class="brand">
+    <div class="brand-icon">🚀</div>
+    <span class="brand-name">Minha Startup</span>
+  </div>
+
+  <div class="nav-section">Workspace</div>
+  <a class="nav-item active" onclick="showSection('admin'); setActive(this)">
+    <div class="nav-dot" style="background:var(--accent-admin)"></div>
+    Administrativo
+  </a>
+  <a class="nav-item" onclick="showSection('op'); setActive(this)">
+    <div class="nav-dot" style="background:var(--accent-op)"></div>
+    Operacional
+  </a>
+
+  <div class="nav-section">Acesso Rápido</div>
+  <a class="nav-item">📅 Reuniões & Atas</a>
+  <a class="nav-item">📊 Métricas</a>
+  <a class="nav-item">🧲 Clientes</a>
+  <a class="nav-item">💡 Produto</a>
+  <a class="nav-item">🗂️ Documentos</a>
+</div>
+
+<div class="main">
+
+  <!-- ── SEÇÃO ADMIN ── -->
+  <div id="section-admin" class="section visible">
+    <div class="page-header">
+      <span class="page-emoji">🗂️</span>
+      <div class="page-title">Administrativo</div>
+      <div class="page-desc">Estrutura legal, financeira e societária da empresa</div>
+    </div>
+
+    <div class="stats-row">
+      <div class="stat-card">
+        <div class="stat-label">Total</div>
+        <div class="stat-value" id="admin-total">12</div>
+        <div class="stat-sub">tarefas</div>
+      </div>
+      <div class="stat-card">
+        <div class="stat-label">Concluídas</div>
+        <div class="stat-value" id="admin-done-count" style="color:var(--accent-admin)">0</div>
+        <div class="progress-bar-wrap"><div class="progress-bar progress-admin" id="admin-bar" style="width:0%"></div></div>
+      </div>
+      <div class="stat-card">
+        <div class="stat-label">Em andamento</div>
+        <div class="stat-value" id="admin-doing">0</div>
+        <div class="stat-sub">tarefas</div>
+      </div>
+      <div class="stat-card">
+        <div class="stat-label">Prioridade alta</div>
+        <div class="stat-value" id="admin-alta" style="color:#C0392B">8</div>
+        <div class="stat-sub">requerem atenção</div>
+      </div>
+    </div>
+
+    <div class="filter-row">
+      <button class="filter-btn active" onclick="filterTasks('admin','todos',this)">Todas</button>
+      <button class="filter-btn" onclick="filterTasks('admin','A fazer',this)">A fazer</button>
+      <button class="filter-btn" onclick="filterTasks('admin','Em andamento',this)">Em andamento</button>
+      <button class="filter-btn" onclick="filterTasks('admin','Concluído',this)">Concluídas</button>
+      <button class="filter-btn" onclick="filterTasks('admin','Alta',this)">🔴 Prioridade Alta</button>
+    </div>
+
+    <div class="checklist">
+      <div class="checklist-header">
+        <div>Tarefa</div>
+        <div>Prioridade</div>
+        <div>Status</div>
+        <div>Observação</div>
+      </div>
+      <div id="admin-list"></div>
+    </div>
+  </div>
+
+  <!-- ── SEÇÃO OPERACIONAL ── -->
+  <div id="section-op" class="section">
+    <div class="page-header">
+      <span class="page-emoji">⚙️</span>
+      <div class="page-title">Operacional</div>
+      <div class="page-desc">Produto, vendas, clientes e processos do dia a dia</div>
+    </div>
+
+    <div class="stats-row">
+      <div class="stat-card">
+        <div class="stat-label">Total</div>
+        <div class="stat-value" id="op-total">14</div>
+        <div class="stat-sub">tarefas</div>
+      </div>
+      <div class="stat-card">
+        <div class="stat-label">Concluídas</div>
+        <div class="stat-value" id="op-done-count" style="color:var(--accent-op)">0</div>
+        <div class="progress-bar-wrap"><div class="progress-bar progress-op" id="op-bar" style="width:0%"></div></div>
+      </div>
+      <div class="stat-card">
+        <div class="stat-label">Em andamento</div>
+        <div class="stat-value" id="op-doing">0</div>
+        <div class="stat-sub">tarefas</div>
+      </div>
+      <div class="stat-card">
+        <div class="stat-label">Prioridade alta</div>
+        <div class="stat-value" id="op-alta" style="color:#C0392B">9</div>
+        <div class="stat-sub">requerem atenção</div>
+      </div>
+    </div>
+
+    <div class="filter-row">
+      <button class="filter-btn active" onclick="filterTasks('op','todos',this)">Todas</button>
+      <button class="filter-btn" onclick="filterTasks('op','A fazer',this)">A fazer</button>
+      <button class="filter-btn" onclick="filterTasks('op','Em andamento',this)">Em andamento</button>
+      <button class="filter-btn" onclick="filterTasks('op','Concluído',this)">Concluídas</button>
+      <button class="filter-btn" onclick="filterTasks('op','Alta',this)">🔴 Prioridade Alta</button>
+    </div>
+
+    <div class="checklist">
+      <div class="checklist-header">
+        <div>Tarefa</div>
+        <div>Prioridade</div>
+        <div>Status</div>
+        <div>Observação</div>
+      </div>
+      <div id="op-list"></div>
+    </div>
+  </div>
+
+</div>
+
+<script>
+const adminTasks = [
+  { name: "Abrir CNPJ", pri: "Alta", status: "A fazer", obs: "Definir CNAE antes" },
+  { name: "Definir contrato social entre sócios", pri: "Alta", status: "A fazer", obs: "% participação + regras de saída" },
+  { name: "Abrir conta PJ", pri: "Alta", status: "A fazer", obs: "Inter PJ ou Nubank PJ (grátis)" },
+  { name: "Contratar contador", pri: "Alta", status: "A fazer", obs: "Pedir indicação ou Contabilizei" },
+  { name: "Definir regime tributário", pri: "Alta", status: "A fazer", obs: "Simples, Lucro Presumido ou Real" },
+  { name: "Definir pró-labore dos sócios", pri: "Alta", status: "A fazer", obs: "Mín. 1 salário mínimo" },
+  { name: "Assinar NDA entre sócios", pri: "Alta", status: "A fazer", obs: "Contrato de confidencialidade" },
+  { name: "Criar e-mail corporativo", pri: "Alta", status: "A fazer", obs: "Google Workspace ou Zoho" },
+  { name: "Registrar marca no INPI", pri: "Média", status: "A fazer", obs: "Verificar disponibilidade antes" },
+  { name: "Criar pasta compartilhada no Drive", pri: "Baixa", status: "A fazer", obs: "Jurídico / Financeiro / Ops" },
+  { name: "Abrir conta de investimento PJ", pri: "Média", status: "A fazer", obs: "Reserva de caixa / runway" },
+  { name: "Configurar certificado digital e-CNPJ", pri: "Média", status: "A fazer", obs: "Assinar docs digitalmente" },
+];
+
+const opTasks = [
+  { name: "Definir MVP (produto mínimo viável)", pri: "Alta", status: "A fazer", obs: "O que resolve a dor principal?" },
+  { name: "Mapear 20 potenciais clientes", pri: "Alta", status: "A fazer", obs: "Nome, contato, empresa, dor" },
+  { name: "Criar pitch de apresentação", pri: "Alta", status: "A fazer", obs: "Máx. 10 slides" },
+  { name: "Fazer 10 conversas de descoberta", pri: "Alta", status: "A fazer", obs: "Entrevistas de validação" },
+  { name: "Definir precificação", pri: "Alta", status: "A fazer", obs: "Por hora, mensalidade ou projeto" },
+  { name: "Criar proposta comercial padrão", pri: "Alta", status: "A fazer", obs: "Template reutilizável" },
+  { name: "Montar funil de vendas", pri: "Alta", status: "A fazer", obs: "Prospecção > Proposta > Fechamento" },
+  { name: "Criar template de contrato com cliente", pri: "Alta", status: "A fazer", obs: "Escopo, prazo, pagamento, rescisão" },
+  { name: "Definir OKRs do 1º trimestre", pri: "Alta", status: "A fazer", obs: "3 objetivos, 2-3 KRs cada" },
+  { name: "Documentar processo de entrega (SOP)", pri: "Média", status: "A fazer", obs: "Como é feita cada entrega" },
+  { name: "Criar perfil LinkedIn da empresa", pri: "Média", status: "A fazer", obs: "Logo, descrição, contato" },
+  { name: "Montar onboarding de clientes", pri: "Média", status: "A fazer", obs: "E-mail boas-vindas + checklist" },
+  { name: "Mapear concorrentes principais", pri: "Média", status: "A fazer", obs: "Preço, diferencial, fraqueza" },
+  { name: "Criar landing page ou site básico", pri: "Média", status: "A fazer", obs: "Framer, Webflow ou Notion" },
+];
+
+const statusCycle = ["A fazer","Em andamento","Concluído","Bloqueado"];
+const statusClass = { "A fazer":"status-todo","Em andamento":"status-doing","Concluído":"status-done-badge","Bloqueado":"status-blocked" };
+const statusLabel = { "A fazer":"A fazer","Em andamento":"Em andamento","Concluído":"Concluído","Bloqueado":"Bloqueado" };
+
+function renderList(section, tasks) {
+  const container = document.getElementById(section+'-list');
+  container.innerHTML = '';
+  const accentClass = section === 'admin' ? 'checked-admin' : 'checked-op';
+  tasks.forEach((t,i) => {
+    const isDone = t.status === 'Concluído';
+    const row = document.createElement('div');
+    row.className = 'task-row' + (isDone?' done':'');
+    row.dataset.status = t.status;
+    row.dataset.pri = t.pri;
+    row.innerHTML = `
+      <div class="task-check">
+        <div class="checkbox ${isDone?accentClass:''}" onclick="toggleCheck(this,'${section}',${i})">
+          <svg viewBox="0 0 10 8"><polyline points="1,4 4,7 9,1"/></svg>
+        </div>
+        <span class="task-name">${t.name}</span>
+      </div>
+      <div><span class="tag tag-${t.pri.toLowerCase()}">${t.pri}</span></div>
+      <div>
+        <button class="status-badge ${statusClass[t.status]}" onclick="cycleStatus('${section}',${i},this)">
+          <span class="status-dot"></span>${statusLabel[t.status]}
+        </button>
+      </div>
+      <div class="obs-cell" title="${t.obs}">${t.obs}</div>
+    `;
+    container.appendChild(row);
+  });
+  updateStats(section, tasks);
+}
+
+function toggleCheck(el, section, idx) {
+  const tasks = section==='admin'?adminTasks:opTasks;
+  const accentClass = section==='admin'?'checked-admin':'checked-op';
+  const newStatus = tasks[idx].status === 'Concluído' ? 'A fazer' : 'Concluído';
+  tasks[idx].status = newStatus;
+  renderList(section, tasks);
+}
+
+function cycleStatus(section, idx, btn) {
+  const tasks = section==='admin'?adminTasks:opTasks;
+  const cur = tasks[idx].status;
+  const next = statusCycle[(statusCycle.indexOf(cur)+1)%statusCycle.length];
+  tasks[idx].status = next;
+  renderList(section, tasks);
+}
+
+function updateStats(section, tasks) {
+  const done = tasks.filter(t=>t.status==='Concluído').length;
+  const doing = tasks.filter(t=>t.status==='Em andamento').length;
+  const alta = tasks.filter(t=>t.pri==='Alta'&&t.status!=='Concluído').length;
+  const total = tasks.length;
+  document.getElementById(section+'-done-count').textContent = done;
+  document.getElementById(section+'-doing').textContent = doing;
+  document.getElementById(section+'-alta').textContent = alta;
+  document.getElementById(section+'-bar').style.width = Math.round(done/total*100)+'%';
+}
+
+function filterTasks(section, filter, btn) {
+  document.querySelectorAll(`#section-${section} .filter-btn`).forEach(b=>b.classList.remove('active'));
+  btn.classList.add('active');
+  const tasks = section==='admin'?adminTasks:opTasks;
+  let filtered;
+  if(filter==='todos') filtered = tasks;
+  else if(filter==='Alta') filtered = tasks.filter(t=>t.pri==='Alta'&&t.status!=='Concluído');
+  else filtered = tasks.filter(t=>t.status===filter);
+  renderList(section, filtered);
+}
+
+function showSection(name) {
+  document.querySelectorAll('.section').forEach(s=>s.classList.remove('visible'));
+  document.getElementById('section-'+name).classList.add('visible');
+  document.querySelectorAll('.filter-btn').forEach(b=>{
+    if(b.textContent==='Todas') b.classList.add('active');
+  });
+  renderList(name, name==='admin'?adminTasks:opTasks);
+}
+
+function setActive(el) {
+  document.querySelectorAll('.nav-item').forEach(n=>n.classList.remove('active'));
+  el.classList.add('active');
+}
+
+renderList('admin', adminTasks);
+renderList('op', opTasks);
+</script>
+</body>
+</html>
